@@ -1,13 +1,36 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: HomePage(),
   ));
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+//TODO: The sound is not working
+class _HomePageState extends State<HomePage> {
+  final player = AudioPlayer();
+
+  var num = 1;
+
+  void changeNumber() async {
+    var random = Random();
+    int randomNumber = random.nextInt(6) + 1;
+    setState(() {
+      num = randomNumber;
+    });
+
+    await player.play(AssetSource("assets/sounds/sound.mp3"));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +46,18 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/dice-1.png",
+                "assets/dice-$num.png",
                 height: 230,
                 width: 230,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               TextButton(
-                onPressed: () {},
-                child: Text(
+                onPressed: () {
+                  changeNumber();
+                },
+                child: const Text(
                   "Roll Dice",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
