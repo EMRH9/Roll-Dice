@@ -16,11 +16,9 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-//TODO: The sound is not working
 class _HomePageState extends State<HomePage> {
-  final player = AudioPlayer();
-
   var num = 1;
+  final player = AudioPlayer();
 
   void changeNumber() async {
     var random = Random();
@@ -28,8 +26,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       num = randomNumber;
     });
-
-    await player.play(AssetSource("assets/sounds/sound.mp3"));
+    await player.play(AssetSource('sounds/sound.mp3'));
   }
 
   @override
@@ -37,16 +34,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.purple, Color.fromARGB(255, 71, 2, 83)])),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.purple,
+              Color.fromARGB(255, 71, 2, 83),
+            ],
+          ),
+        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/dice-$num.png",
+                "assets/images/dice-$num.png",
                 height: 230,
                 width: 230,
               ),
